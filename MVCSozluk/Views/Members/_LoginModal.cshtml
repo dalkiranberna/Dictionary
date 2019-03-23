@@ -1,0 +1,54 @@
+﻿@using Entity.ViewModels
+@model LoginViewModel
+
+@{
+	ViewBag.Title = "_LoginModal";
+	Layout = null;
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form", @role = "form", @id = "login-nav" }))
+{
+	<div class="form-group">
+		
+		@Html.LabelFor(x => x.Email, new { @class = "sr-only" }) 
+		@Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Kullanıcı Adınız", @required = "required" })
+	</div>
+	<div class="form-group">
+		
+		@Html.LabelFor(x => x.Password, new { @class = "sr-only" })
+		@Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password", @placeholder = "Şifreniz", @required = "required" })
+		<div class="help-block text-right">
+			*@
+			@Html.ActionLink("Şifremi Unuttum", "ForgatPassword", "Account")
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="button" class="btn btn-primary btn-block">Giriş Yap</button> 
+	</div>
+	<div class="checkbox">
+		<label>
+			@Html.EditorFor(x => x.RememberMe)
+			@Html.LabelFor(x => x.RememberMe)
+		</label>
+	</div>
+}
+@*</form>*@
+
+<script>
+	$("#login-nav button").click(function () {
+		var gidecekVeri = $("#login-nav").serialize();
+		$.ajax({
+			url: "/Members/Login",
+			method: "POST", 
+			data: gidecekVeri,
+			success: function (result) { 
+				if (result.success)
+					
+					window.location = window.location;
+				else
+					alert("Giriş başarısız. Tekrar deneyin.");
+			}
+		});
+	});
+</script>

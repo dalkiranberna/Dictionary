@@ -1,0 +1,38 @@
+﻿<section id="contact">
+	<div class="section-content">
+		<h1 class="section-header"> <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Translate</span> your text</h1>
+		<h3>Write and click <b>TRANSLATE</b></h3>
+	</div>
+	<div class="contact-section">
+		<div class="container">
+			@using (Html.BeginForm())
+			{
+				<div class="col-md-6 form-line">
+					<div class="form-group">
+						@Html.Label("Hangi Dilden", new { @for="from"})
+
+						@Html.DropDownList("from", (IEnumerable<SelectListItem>)ViewBag.Langs)
+						
+					</div>
+					<div class="form-group">
+						@Html.TextArea("original", new { @class="form-control", @placeholder="Çevirmek istediğiniz kelime"})
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						@Html.Label("Hangi Dile")
+						@Html.DropDownList("To", (IEnumerable<SelectListItem>)ViewBag.Langs)
+						
+					</div>
+					<div class="form-group">
+						@Html.TextArea("translated", new { @class = "form-control", @placeholder = "Çeviri burada görüntülenecek" })
+					</div>
+					<div>
+						<button type="button" class="btn btn-default submit"><i class="fa fa-globe" aria-hidden="true"></i>   translate</button>
+					</div>
+
+				</div>
+			}
+		</div>
+	</div>
+</section>

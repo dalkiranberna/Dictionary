@@ -1,0 +1,42 @@
+﻿@using Entity
+@using Microsoft.AspNet.Identity
+@model List<WordRequest>
+
+<style>
+	table {
+		background-color: cadetblue;
+	}
+</style>
+
+<div class="container">
+	<h2>Bekleyen Kelime İstekleri</h2>
+
+	@Html.ActionLink("Yeni İstek Oluştur", "Create", "WordRequest", htmlAttributes: new { @class="btn btn-primary"})
+
+	<br /><br />
+
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Kelime</th>
+				<th>Dil</th>
+				<th>İşlem</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Word</td>
+					<td>@item.Language.Name</td>
+					<td>
+						@if (item.Person.Id == User.Identity.GetUserId())
+						{
+							@Html.ActionLink("Sil", "Index", new { @del = item.ID })
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
